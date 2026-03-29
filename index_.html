@@ -7,6 +7,7 @@
   <meta name="description" content="Charlito Espino - Web Developer, Network Engineer. Services include ISP solutions, Piso WiFi setup, printer repair, and network setup.">
   <meta name="keywords" content="Web Developer, Network Engineer, IT Services, Piso WiFi, Printer Repair, Network Setup, PHP, Laravel, MikroTik">
   <meta name="author" content="Charlito Espino">
+  <meta name="google-site-verification" content="googleea4cd199591ddc2f.html" />
   <link rel="canonical" href="https://charlitoespino.github.io/">
 
   <!-- Open Graph / Social Sharing -->
@@ -38,11 +39,6 @@
     .hero { padding: 100px 0; }
     .project-card:hover { transform: translateY(-5px); transition: 0.3s; }
     .badge-skill { margin: 3px; }
-
-    /* Ensure navbar-toggler-icon is visible in dark mode */
-    .dark-mode .navbar-light .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    }
   </style>
 </head>
 <body>
@@ -50,7 +46,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm px-4">
   <a class="navbar-brand fw-bold" href="#">Charlito Espino</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navMenu">
@@ -70,7 +66,7 @@
 
 <!-- Hero -->
 <section id="home" class="hero text-center container">
-  <h1 class="display-4 fw-bold">Hi, I'm Charlito 👋</h1>
+  <h1 class="display-4 fw-bold">Hi, I'm Charlito</h1>
   <p class="lead">Web Developer | Network Engineer | IT Solutions Builder</p>
   <p>I build scalable systems, ISP solutions, and automation tools.</p>
   <a href="#projects" class="btn btn-primary me-2">View Projects</a>
@@ -152,33 +148,11 @@
 <script>
   const toggleBtn = document.getElementById('themeToggle');
   const body = document.body;
-  const navCollapse = document.getElementById('navMenu');
-  const bsCollapse = new bootstrap.Collapse(navCollapse, { toggle: false });
-
-  // Load saved theme
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-  }
-
-  // Toggle theme
+  if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark-mode'); toggleBtn.innerHTML = '<i class="fas fa-sun"></i>'; }
   toggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
-    if (body.classList.contains('dark-mode')) {
-      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-      localStorage.setItem('theme', 'light');
-    }
-  });
-
-  // Close navbar when clicking outside
-  document.addEventListener('click', (event) => {
-    const isClickInside = navCollapse.contains(event.target) || event.target.classList.contains('navbar-toggler');
-    if (!isClickInside && navCollapse.classList.contains('show')) {
-      bsCollapse.hide();
-    }
+    if (body.classList.contains('dark-mode')) { toggleBtn.innerHTML = '<i class="fas fa-sun"></i>'; localStorage.setItem('theme', 'dark'); }
+    else { toggleBtn.innerHTML = '<i class="fas fa-moon"></i>'; localStorage.setItem('theme', 'light'); }
   });
 </script>
 
