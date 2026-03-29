@@ -36,7 +36,10 @@
     .dark-mode .card { background-color: #1e1e1e; color: #fff; border: 1px solid #333; }
     .dark-mode .btn-outline-dark { color: #fff; border-color: #fff; }
     .section-title { font-weight: 700; margin-bottom: 30px; }
-    .hero { padding: 100px 0; min-height: 100vh; display: flex; align-items: center;}
+    .hero { padding: 100px 0; min-height: 100vh; display: flex; align-items: center;
+    padding-bottom: 20px;          /* space inside section */
+    border-bottom: 3px solid #000; /* line thickness & color */
+    }
     .project-card:hover { transform: translateY(-5px); transition: 0.3s; }
     .badge-skill { margin: 3px; }
 
@@ -70,15 +73,17 @@
 </nav>
 
 <!-- Hero Section -->
-<section id="home" class="hero container">
+<section id="home" class="hero">
   <div class="container text-center">
-    <h1>Hi, I’m Charlito</h1>
+    <h1>Hi, <span class="text-primary">I’m Charlito</span></h1>
     <p class="lead">Web Developer | Network Engineer | IT Solutions Builder</p>
     <p class="lead">I build fast, responsive, and scalable web applications. Passionate about clean code and user-focused experiences.</p>
     <a href="#projects" class="btn btn-primary me-2">View Projects</a>
     <a href="#contact" class="btn btn-outline-secondary">Contact Me</a>
   </div>
 </section>
+
+<hr >
 
 <!-- About Me -->
 <section id="about" class="py-5">
