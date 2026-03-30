@@ -36,8 +36,35 @@
     .dark-mode .card { background-color: #1e1e1e; color: #fff; border: 1px solid #333; }
     .dark-mode .btn-outline-dark { color: #fff; border-color: #fff; }
     .section-title { font-weight: 700; margin-bottom: 30px; }
-    .hero { padding: 100px 0; min-height: 100vh; display: flex; align-items: center;
+    /* .hero { padding: 100px 0; min-height: 100vh; display: flex; align-items: center;
+    } */
+     .hero {
+      padding: 100px 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center 0px;
+      background-repeat: no-repeat;
+
+      position: relative;
+      overflow: hidden;
     }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+    }
+
     .project-card:hover { transform: translateY(-5px); transition: 0.3s; }
     .badge-skill { margin: 3px; }
 
@@ -45,9 +72,58 @@
     .dark-mode .navbar-light .navbar-toggler-icon {
       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     }
+
+    .navbar .nav-link.active {
+      color: #0d6efd !important;
+      font-weight: bold;
+    }
+
+    #about{
+      min-height: 400px;
+    }
+    #skills{
+      min-height: 400px;
+    }
+    #projects{
+      min-height: 400px;
+    }
+
+    #services{
+      min-height: 400px;
+    }
+
+    #contact{
+      min-height: 400px;
+    }
+
+    /* Reveal base state */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+
+  /* Active (visible) state */
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional variations */
+  .reveal-left {
+    transform: translateX(-40px);
+  }
+  .reveal-right {
+    transform: translateX(40px);
+  }
+
+  .reveal-left.active,
+  .reveal-right.active {
+    transform: translateX(0);
+  }
   </style>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="80" tabindex="0">
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm px-4">
@@ -87,10 +163,8 @@
   </div>
 </section>
 
-<hr >
-
 <!-- About Me -->
-<section id="about" class="py-5">
+<section id="about" class="py-5 reveal">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-4 text-center">
@@ -105,7 +179,7 @@
 </section>
 
 <!-- Skills -->
-<section id="skills" class="container py-5">
+<section id="skills" class="container py-5 reveal">
   <h2 class="section-title">Skills</h2>
   <h5>Development</h5>
   <span class="badge bg-primary badge-skill">C#</span>
@@ -125,7 +199,7 @@
 </section>
 
 <!-- Projects -->
-<section id="projects" class="container py-5">
+<section id="projects" class="container py-5 reveal">
   <h2 class="section-title">Projects</h2>
   <div class="row g-4">
     <div class="col-md-4"><div class="card p-3 project-card"><h5>ISP Billing System</h5><p>Billing system with automated reminders, partial payments, and GCash integration.</p></div></div>
@@ -135,7 +209,7 @@
 </section>
 
 <!-- Services -->
-<section id="services" class="container py-5">
+<section id="services" class="container py-5 reveal">
   <h2 class="section-title">Services</h2>
   <div class="row g-4">
     <div class="col-md-4"><div class="card p-3 project-card"><h5>Piso WiFi Build & Repair</h5><p>Setup and repair of prepaid WiFi systems for small businesses and cafes.</p></div></div>
@@ -145,7 +219,7 @@
 </section>
 
 <!-- Contact -->
-<section id="contact" class="container py-5">
+<section id="contact" class="container py-5 reveal">
   <h2 class="section-title">Contact</h2>
   <div class="row">
     <div class="col-md-6">
@@ -200,6 +274,48 @@
     if (!isClickInside && navCollapse.classList.contains('show')) {
       bsCollapse.hide();
     }
+  });
+
+  const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+    target: '.navbar',
+    offset: 80
+  });
+
+  function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+
+    reveals.forEach(el => {
+      const windowHeight = window.innerHeight;
+      const elementTop = el.getBoundingClientRect().top;
+      const revealPoint = 100;
+
+      if (elementTop < windowHeight - revealPoint) {
+        el.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+
+  // Run once on load
+  window.addEventListener('load', revealOnScroll);
+
+
+  const hero = document.querySelector('.hero');
+
+  window.addEventListener('scroll', () => {
+    let scrollY = window.scrollY;
+
+    // Background parallax
+    hero.style.backgroundPositionY = (scrollY * 0.5) + 'px';
+  });
+
+  const heroContent = document.querySelector('.hero .container');
+
+  window.addEventListener('scroll', () => {
+    let scrollY = window.scrollY;
+
+    heroContent.style.transform = `translateY(${scrollY * 0.2}px)`;
   });
 </script>
 
