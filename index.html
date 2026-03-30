@@ -79,7 +79,7 @@
     }
 
     #about{
-      min-height: 400px;
+      min-height: 500px;
     }
     #skills{
       min-height: 400px;
@@ -170,7 +170,7 @@
       Turning ideas into scalable systems and seamless ISP solutions.
     </p>
     <a href="#projects" class="btn btn-primary me-2">View Projects</a>
-    <a href="#contact" class="btn btn-outline-secondary">Contact Me</a>
+    <a href="#contact" class="btn btn-outline-light">Contact Me</a>
   </div>
 </section>
 
@@ -179,7 +179,7 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-4 text-center">
-        <img src="charlito-espino.jpeg" class="img-fluid rounded-circle" alt="Profile">
+        <img src="charlito-espino.jpeg" class="img-fluid" alt="Profile">
       </div>
       <div class="col-md-8">
         <h2>About Me</h2>
@@ -287,9 +287,11 @@
     }
   });
 
+  const navbar = document.querySelector('.navbar');
+
   const scrollSpy = new bootstrap.ScrollSpy(document.body, {
     target: '.navbar',
-    offset: 80
+    offset: navbar.offsetHeight
   });
 
   function revealOnScroll() {
@@ -311,6 +313,10 @@
   // Run once on load
   window.addEventListener('load', revealOnScroll);
 
+  window.addEventListener('load', () => {
+    scrollSpy.refresh();
+  });
+
 
   const hero = document.querySelector('.hero');
 
@@ -323,11 +329,11 @@
 
   const heroContent = document.querySelector('.hero .container');
 
-  window.addEventListener('scroll', () => {
+  /*window.addEventListener('scroll', () => {
     let scrollY = window.scrollY;
 
     heroContent.style.transform = `translateY(${scrollY * 0.2}px)`;
-  });
+  });*/
 </script>
 
 </body>
